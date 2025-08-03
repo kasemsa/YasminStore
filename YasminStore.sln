@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YasminStore.Domain", "YasminStore.Domain\YasminStore.Domain.csproj", "{0F9182D3-4008-46AE-B560-0824DB6A7499}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YasminStore.Application", "YasminStore.Application\YasminStore.Application.csproj", "{D5807984-2EA9-44D9-9268-DF69082EB9C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YasminStore.ApplicationContract", "YasminStore.ApplicationContract\YasminStore.ApplicationContract.csproj", "{28B609B9-C6C6-444F-8C6C-EC2F085539F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YasminStore.Infrastructure", "YasminStore.Infrastructure\YasminStore.Infrastructure.csproj", "{686DDEBB-686F-4ECC-A579-774C705D4AB4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YasminStore.API", "YasminStore.API\YasminStore.API.csproj", "{0B73C09F-F07C-4A49-A223-33BB463093F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YasminStore.Persistence", "YasminStore.Persistence\YasminStore.Persistence.csproj", "{B9FAA0E2-6942-484A-AF3D-85428E7A5275}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F9182D3-4008-46AE-B560-0824DB6A7499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F9182D3-4008-46AE-B560-0824DB6A7499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F9182D3-4008-46AE-B560-0824DB6A7499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F9182D3-4008-46AE-B560-0824DB6A7499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5807984-2EA9-44D9-9268-DF69082EB9C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5807984-2EA9-44D9-9268-DF69082EB9C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5807984-2EA9-44D9-9268-DF69082EB9C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5807984-2EA9-44D9-9268-DF69082EB9C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B609B9-C6C6-444F-8C6C-EC2F085539F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B609B9-C6C6-444F-8C6C-EC2F085539F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B609B9-C6C6-444F-8C6C-EC2F085539F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B609B9-C6C6-444F-8C6C-EC2F085539F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{686DDEBB-686F-4ECC-A579-774C705D4AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{686DDEBB-686F-4ECC-A579-774C705D4AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{686DDEBB-686F-4ECC-A579-774C705D4AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{686DDEBB-686F-4ECC-A579-774C705D4AB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B73C09F-F07C-4A49-A223-33BB463093F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B73C09F-F07C-4A49-A223-33BB463093F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B73C09F-F07C-4A49-A223-33BB463093F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B73C09F-F07C-4A49-A223-33BB463093F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9FAA0E2-6942-484A-AF3D-85428E7A5275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9FAA0E2-6942-484A-AF3D-85428E7A5275}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9FAA0E2-6942-484A-AF3D-85428E7A5275}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9FAA0E2-6942-484A-AF3D-85428E7A5275}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1BCB2932-7178-4B68-A712-36ABE05D367D}
+	EndGlobalSection
+EndGlobal
