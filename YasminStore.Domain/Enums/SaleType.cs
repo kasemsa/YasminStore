@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YasminStore.ApplicationContract.Enums
+namespace YasminStore.Domain.Enums
 {
     public enum SaleType
     {

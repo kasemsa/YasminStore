@@ -1,18 +1,22 @@
-using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using YasminStore.Domain;
+using YasminStore.Infrastructure;
+using YasminStore.Application;
+using YasminStore.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices();
 
+
+builder.Services.AddPersistenceServices(builder.Configuration);
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -42,10 +46,21 @@ builder.Services.AddSwaggerGen(c =>
            }
         });
 });
+
 builder.Services.AddHttpContextAccessor();
+
+// ✅ إضافة CORS Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Open", policy =>
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader());
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -59,11 +74,10 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/UploadedFiles"
 });
 
-app.UseCors("Open");
 app.UseHttpsRedirection();
 
+app.UseCors("Open"); // ✅ قبل Authorization
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();

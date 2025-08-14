@@ -5,29 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using YasminStore.Domain.Enums;
 
-namespace YasminStore.Domain.Entities
+namespace YasminStore.ApplicationContract.DTOs.Stores
 {
-    public class Store
+
+    public class CreateStoreDto
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
         public string CommercialRegistrationNumber { get; set; } = string.Empty;
         public TimeOnly OpenAt { get; set; }
-        public TimeOnly ClosedAt {  get; set; }
+        public TimeOnly ClosedAt { get; set; }
         public Cities City { get; set; }
-        public SaleType saleType { get; set; }
+        public SaleType SaleType { get; set; }
         public string PhoneNumber { get; set; } = string.Empty;
-        public string? logo { get; set; }
-        public string? facebookPage {  get; set; }
-        public string? instaAcount {  get; set; }
-        public string? whatsapp { get; set; }
-        public string? telegram { get; set; }
-
-        public List<StoreImages> StoreImages { get; set; }
-        public List<StoreCategory> StoreCategories { get; set; } = new();
-        
+        public string? Logo { get; set; }
+        public string? FacebookPage { get; set; }
+        public string? InstaAccount { get; set; }
+        public string? Whatsapp { get; set; }
+        public string? Telegram { get; set; }
+        public List<int> CategoryIds { get; set; } = new();
     }
-
 }
