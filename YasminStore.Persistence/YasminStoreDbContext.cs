@@ -48,6 +48,19 @@ namespace YasminStore.Persistence
                 .HasOne(sc => sc.Category)
                 .WithMany(c => c.StoreCategories)
                 .HasForeignKey(sc => sc.CategoryId);
+
+
+
+            // UserRole composite key إذا أردت
+            modelBuilder.Entity<UserRole>()
+                .HasOne(ur => ur.User)
+                .WithMany(u => u.userRoles)
+                .HasForeignKey(ur => ur.UserId);
+
+            modelBuilder.Entity<UserRole>()
+                .HasOne(ur => ur.Role)
+                .WithMany(r => r.userRoles)
+                .HasForeignKey(ur => ur.RoleId);
         }
     }
 }

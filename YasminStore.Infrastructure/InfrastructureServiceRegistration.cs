@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using YasminStore.ApplicationContract.Identity;
 using YasminStore.ApplicationContract.Interfaces;
 using YasminStore.Infrastructure.Repositories;
 
@@ -14,8 +14,9 @@ namespace YasminStore.Infrastructure
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IStoreRepository, StoreRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IAuthService, AuthService>();
+
 
             return services;
         }

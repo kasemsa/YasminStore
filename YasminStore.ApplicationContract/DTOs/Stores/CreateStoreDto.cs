@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YasminStore.Domain.Entities;
 using YasminStore.Domain.Enums;
 
 namespace YasminStore.ApplicationContract.DTOs.Stores
@@ -24,6 +25,9 @@ namespace YasminStore.ApplicationContract.DTOs.Stores
         public string? InstaAccount { get; set; }
         public string? Whatsapp { get; set; }
         public string? Telegram { get; set; }
-        public List<int> CategoryIds { get; set; } = new();
+
+        public List<string>? StoreImages { get; set; } // فقط روابط الصور أو Base64
+        public List<int>? CategoryIds { get; set; }
     }
+
 }

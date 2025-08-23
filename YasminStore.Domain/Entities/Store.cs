@@ -21,7 +21,7 @@ namespace YasminStore.Domain.Entities
         public string PhoneNumber { get; set; } = string.Empty;
         public string? logo { get; set; }
         public string? facebookPage {  get; set; }
-        public string? instaAcount {  get; set; }
+        public string? instaAccount { get; set; }
         public string? whatsapp { get; set; }
         public string? telegram { get; set; }
 

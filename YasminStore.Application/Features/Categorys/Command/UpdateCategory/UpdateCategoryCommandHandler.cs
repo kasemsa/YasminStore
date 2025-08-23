@@ -13,6 +13,11 @@ namespace YasminStore.Application.Features.Categorys.Command.UpdateCategory
     {
         private readonly ICategoryRepository _repository;
 
+        public UpdateCategoryCommandHandler(ICategoryRepository repository)
+        {
+            _repository = repository;
+        }
+
         public async Task Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = await _repository.GetByIdAsync(request.Id);

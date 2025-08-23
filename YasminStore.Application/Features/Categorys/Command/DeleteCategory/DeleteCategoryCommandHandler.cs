@@ -13,6 +13,11 @@ namespace YasminStore.Application.Features.Categorys.Command.DeleteCategory
     {
         private readonly ICategoryRepository _repository;
 
+        public DeleteCategoryCommandHandler(ICategoryRepository repository)
+        {
+            _repository = repository;
+        }
+
         public async Task Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = await _repository.GetByIdAsync(request.Id);

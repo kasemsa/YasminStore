@@ -12,8 +12,8 @@ using YasminStore.Persistence;
 namespace YasminStore.Persistence.Migrations
 {
     [DbContext(typeof(YasminStoreDbContext))]
-    [Migration("20250807182801_AddCategoryAndStoreRealtion")]
-    partial class AddCategoryAndStoreRealtion
+    [Migration("20250823142444_InitialAuthTables")]
+    partial class InitialAuthTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,6 +99,9 @@ namespace YasminStore.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("City")
+                        .HasColumnType("int");
+
                     b.Property<TimeOnly>("ClosedAt")
                         .HasColumnType("time");
 
@@ -125,13 +128,10 @@ namespace YasminStore.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("city")
-                        .HasColumnType("int");
-
                     b.Property<string>("facebookPage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("instaAcount")
+                    b.Property<string>("instaAccount")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("logo")
@@ -139,6 +139,9 @@ namespace YasminStore.Persistence.Migrations
 
                     b.Property<int>("saleType")
                         .HasColumnType("int");
+
+                    b.Property<string>("telegram")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("whatsapp")
                         .HasColumnType("nvarchar(max)");
@@ -148,7 +151,7 @@ namespace YasminStore.Persistence.Migrations
                     b.ToTable("Stores");
                 });
 
-            modelBuilder.Entity("YasminStore.Domain.Entities.StoreCategoryStore", b =>
+            modelBuilder.Entity("YasminStore.Domain.Entities.StoreCategory", b =>
                 {
                     b.Property<int>("StoreId")
                         .HasColumnType("int");
@@ -160,7 +163,7 @@ namespace YasminStore.Persistence.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("StoreCategoryStores");
+                    b.ToTable("StoreCategory");
                 });
 
             modelBuilder.Entity("YasminStore.Domain.Entities.StoreImages", b =>
@@ -234,16 +237,16 @@ namespace YasminStore.Persistence.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("YasminStore.Domain.Entities.StoreCategoryStore", b =>
+            modelBuilder.Entity("YasminStore.Domain.Entities.StoreCategory", b =>
                 {
                     b.HasOne("YasminStore.Domain.Entities.Category", "Category")
-                        .WithMany("StoreCategoryStores")
+                        .WithMany("StoreCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("YasminStore.Domain.Entities.Store", "Store")
-                        .WithMany("StoreCategoryStores")
+                        .WithMany("StoreCategories")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -285,7 +288,7 @@ namespace YasminStore.Persistence.Migrations
 
             modelBuilder.Entity("YasminStore.Domain.Entities.Category", b =>
                 {
-                    b.Navigation("StoreCategoryStores");
+                    b.Navigation("StoreCategories");
                 });
 
             modelBuilder.Entity("YasminStore.Domain.Entities.Role", b =>
@@ -295,7 +298,7 @@ namespace YasminStore.Persistence.Migrations
 
             modelBuilder.Entity("YasminStore.Domain.Entities.Store", b =>
                 {
-                    b.Navigation("StoreCategoryStores");
+                    b.Navigation("StoreCategories");
 
                     b.Navigation("StoreImages");
                 });

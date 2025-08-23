@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YasminStore.ApplicationContract.DTOs.Stores;
 
-namespace YasminStore.Application.Features.Stores.Queries.GetAllStores
+namespace YasminStore.Application.Features.Stores.Command.UpdateStore
 {
-    public class GetAllStores : IRequest<List<StoreDto>> { }
+    public record UpdateStoreCommand(UpdateStoreDto Dto) : IRequest<Unit>;
 }

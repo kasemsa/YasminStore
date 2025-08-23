@@ -10,22 +10,23 @@ using YasminStore.ApplicationContract.Interfaces;
 
 namespace YasminStore.Application.Features.Stores.Queries.GetStoreById
 {
-   
-    public class GetStoreByIdQueryHandler : IRequestHandler<GetStoreById, StoreDto>
+
+    public class GetStoreByIdQueryHandler : IRequestHandler<GetStoreByIdQuery, StoreResponseDto>
     {
-        private readonly IStoreRepository _storeRepository;
+        private readonly IStoreRepository _repo;
         private readonly IMapper _mapper;
 
-        public GetStoreByIdQueryHandler(IStoreRepository storeRepository, IMapper mapper)
+        public GetStoreByIdQueryHandler(IStoreRepository repo, IMapper mapper)
         {
-            _storeRepository = storeRepository;
+            _repo = repo;
             _mapper = mapper;
         }
 
-        public async Task<StoreDto> Handle(GetStoreById request, CancellationToken cancellationToken)
+        public async Task<StoreResponseDto> Handle(GetStoreByIdQuery request, CancellationToken cancellationToken)
         {
-            var store = await _storeRepository.GetByIdAsync(request.Id);
-            return _mapper.Map<StoreDto>(store);
+            var store = await _repo.GetByIdAsync(request.Id);
+            if (store is null) throw new KeyNotFoundException("Store not found");
+            return _mapper.Map<StoreResponseDto>(store);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using YasminStore.Application.Features.Categorys.Command.CreateCategory;
 using YasminStore.Application.Features.Categorys.Command.DeleteCategory;
 using YasminStore.Application.Features.Categorys.Command.UpdateCategory;
@@ -48,17 +49,20 @@ namespace YasminStore.API.Controllers
         }
 
         // POST api/categories
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult<int>> Create([FromBody] CreateCategoryCommand command)
         {
 
-            var query = new CreateCategoryCommand();
-            var result = await _mediator.Send(query);
+            if (command == null)
+            {
+                return BadRequest("Request body cannot be null");
+            }
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
 
         // Put api/category/{Id}
-        [HttpPut("{id}")]
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateCategoryCommand command)
         {
             if (id != command.Id) return BadRequest();

@@ -1,11 +1,12 @@
-﻿using YasminStore.ApplicationContract.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using YasminStore.ApplicationContract.Interfaces;
 using YasminStore.Domain.Entities;
 using YasminStore.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 namespace YasminStore.Infrastructure.Repositories
 {
-    public class StoreRepository :  IStoreRepository
+    public class StoreRepository : IStoreRepository
     {
         private readonly YasminStoreDbContext _context;
 
@@ -14,25 +15,39 @@ namespace YasminStore.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<int> AddAsync(Store store)
+        public async Task<Store?> GetByIdAsync(int id)
         {
-            _context.Stores.Add(store);
-            await _context.SaveChangesAsync();
-            return store.Id;
+            return await _context.Stores
+                .Include(s => s.StoreImages)
+                .Include(s => s.StoreCategories)
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<List<Store>> GetAllAsync()
         {
-            return await _context.Stores.ToListAsync();
+            return await _context.Stores
+                .Include(s => s.StoreImages)
+                .Include(s => s.StoreCategories)
+                .ToListAsync();
         }
 
-       
-
-        public async Task<Store?> GetByIdAsync(int id)
+        public async Task<Store> AddAsync(Store store)
         {
-            return await _context.Stores.FindAsync(id);
+            _context.Stores.Add(store);
+            await _context.SaveChangesAsync();
+            return store;
         }
 
-       
+        public async Task UpdateAsync(Store store)
+        {
+            _context.Stores.Update(store);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Store store)
+        {
+            _context.Stores.Remove(store);
+            await _context.SaveChangesAsync();
+        }
     }
 }

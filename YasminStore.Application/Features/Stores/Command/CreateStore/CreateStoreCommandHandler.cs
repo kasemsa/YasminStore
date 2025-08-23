@@ -1,78 +1,46 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YasminStore.Application.Features.Stores.Command.CreateStore;
+using YasminStore.Application.Features.Stores.Commands.CreateStore.Dtos;
+using YasminStore.ApplicationContract.DTOs.Stores;
 using YasminStore.ApplicationContract.Interfaces;
 using YasminStore.Domain.Entities;
-using AutoMapper;
-using YasminStore.Application.Features.Stores.Commands.CreateStore.Dtos;
 
 
 namespace YasminStore.Application.Features.Stores.Commands.CreateStore
 {
 
 
-    public class CreateStoreCommandHandler : IRequestHandler<CreateStoreCommand, int>
+    public class CreateStoreCommandHandler : IRequestHandler<CreateStoreCommand, StoreResponseDto>
     {
-        private readonly IStoreRepository _storeRepository;
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IStoreRepository _repo;
+        private readonly IMapper _mapper;
 
-        public CreateStoreCommandHandler(
-            IStoreRepository storeRepository,
-            ICategoryRepository categoryRepository,
-            IUnitOfWork unitOfWork)
+        public CreateStoreCommandHandler(IStoreRepository repo, IMapper mapper)
         {
-            _storeRepository = storeRepository;
-            _categoryRepository = categoryRepository;
-            _unitOfWork = unitOfWork;
+            _repo = repo;
+            _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateStoreCommand request, CancellationToken cancellationToken)
+        public async Task<StoreResponseDto> Handle(CreateStoreCommand request, CancellationToken cancellationToken)
         {
-            var store = new Store
-            {
-                Name = request.Name,
-                Description = request.Description,
-                Location = request.Location,
-                CommercialRegistrationNumber = request.CommercialRegistrationNumber,
-                OpenAt = request.OpenAt,
-                ClosedAt = request.ClosedAt,
-                City = request.City,
-                saleType = request.SaleType,
-                PhoneNumber = request.PhoneNumber,
-                logo = request.Logo,
-                facebookPage = request.FacebookPage,
-                instaAcount = request.InstaAccount,
-                whatsapp = request.Whatsapp,
-                telegram = request.Telegram,
-                StoreCategories = new List<StoreCategory>()
-            };
+            var entity = _mapper.Map<Store>(request.Dto);
 
-            // Add categories if any
-            if (request.CategoryIds.Any())
+            if (request.Dto.CategoryIds?.Count > 0)
             {
-                foreach (var categoryId in request.CategoryIds)
-                {
-                    var category = await _categoryRepository.GetByIdAsync(categoryId);
-                    if (category != null)
-                    {
-                        store.StoreCategories.Add(new StoreCategory
-                        {
-                            CategoryId = categoryId,
-                            Store = store
-                        });
-                    }
-                }
+                entity.StoreCategories = request.Dto.CategoryIds
+                    .Distinct()
+                    .Select(cid => new StoreCategory { CategoryId = cid, Store = entity })
+                    .ToList();
             }
 
-            await _storeRepository.AddAsync(store);
-            await _unitOfWork.SaveChangesAsync();
-
-            return store.Id;
+            var created = await _repo.AddAsync(entity);
+            return _mapper.Map<StoreResponseDto>(created);
         }
     }
 }

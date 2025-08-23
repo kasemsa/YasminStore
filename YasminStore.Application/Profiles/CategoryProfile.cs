@@ -17,6 +17,7 @@ namespace YasminStore.Application.Profiles
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<CreateCategoryDto, Category>();
             CreateMap<UpdateCategoryDto, UpdateCategoryCommand>();
+           
         }
     }
 }

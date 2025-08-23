@@ -6,11 +6,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace YasminStore.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialAuthTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
@@ -42,19 +55,6 @@ namespace YasminStore.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StoreCategories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StoreCategories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Stores",
                 columns: table => new
                 {
@@ -66,13 +66,14 @@ namespace YasminStore.Persistence.Migrations
                     CommercialRegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OpenAt = table.Column<TimeOnly>(type: "time", nullable: false),
                     ClosedAt = table.Column<TimeOnly>(type: "time", nullable: false),
-                    city = table.Column<int>(type: "int", nullable: false),
+                    City = table.Column<int>(type: "int", nullable: false),
                     saleType = table.Column<int>(type: "int", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     logo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     facebookPage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    instaAcount = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    whatsapp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    instaAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    whatsapp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    telegram = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,25 +96,23 @@ namespace YasminStore.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StoreCategoryStores",
+                name: "StoreCategory",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StoreCategoryId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     StoreId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StoreCategoryStores", x => x.Id);
+                    table.PrimaryKey("PK_StoreCategory", x => new { x.StoreId, x.CategoryId });
                     table.ForeignKey(
-                        name: "FK_StoreCategoryStores_StoreCategories_StoreCategoryId",
-                        column: x => x.StoreCategoryId,
-                        principalTable: "StoreCategories",
+                        name: "FK_StoreCategory_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StoreCategoryStores_Stores_StoreId",
+                        name: "FK_StoreCategory_Stores_StoreId",
                         column: x => x.StoreId,
                         principalTable: "Stores",
                         principalColumn: "Id",
@@ -167,14 +166,9 @@ namespace YasminStore.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_StoreCategoryStores_StoreCategoryId",
-                table: "StoreCategoryStores",
-                column: "StoreCategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StoreCategoryStores_StoreId",
-                table: "StoreCategoryStores",
-                column: "StoreId");
+                name: "IX_StoreCategory_CategoryId",
+                table: "StoreCategory",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StoreImages_StoreId",
@@ -199,7 +193,7 @@ namespace YasminStore.Persistence.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "StoreCategoryStores");
+                name: "StoreCategory");
 
             migrationBuilder.DropTable(
                 name: "StoreImages");
@@ -208,7 +202,7 @@ namespace YasminStore.Persistence.Migrations
                 name: "UserRoles");
 
             migrationBuilder.DropTable(
-                name: "StoreCategories");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Stores");

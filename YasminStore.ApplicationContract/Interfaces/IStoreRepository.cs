@@ -10,11 +10,12 @@ namespace YasminStore.ApplicationContract.Interfaces
     public interface IStoreRepository
     {
 
-        Task<int> AddAsync(Store store);
-
-        Task<List<Store>> GetAllAsync();
         Task<Store?> GetByIdAsync(int id);
-       
-      
+        Task<List<Store>> GetAllAsync();
+        Task<Store> AddAsync(Store store);
+        Task UpdateAsync(Store store);
+        Task DeleteAsync(Store store);
+
+
     }
 }

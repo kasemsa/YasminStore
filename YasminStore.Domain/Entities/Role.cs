@@ -9,8 +9,8 @@ namespace YasminStore.Domain.Entities
     public class Role
     {
         public int Id { get; set; }
-        public string RoleName {  get; set; } = string.Empty;
+        public string RoleName { get; set; } = string.Empty;
 
-        public List<UserRole> userRoles { get; set; }
+        public List<UserRole> userRoles { get; set; } = new();
     }
 }

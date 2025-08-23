@@ -6,12 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YasminStore.ApplicationContract.DTOs.Stores;
 
-namespace YasminStore.Application.Features.Stores.Queries.GetStoreById
+namespace YasminStore.Application.Features.Stores.Queries.GetAllStores
 {
-   
-
-    public class GetStoreById : IRequest<StoreDto>
-    {
-        public int Id { get; set; }
-    }
+    public record GetStoresQuery() : IRequest<List<StoreResponseDto>>;
 }
