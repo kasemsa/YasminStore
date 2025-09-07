@@ -22,7 +22,7 @@ namespace YasminStore.Infrastructure.Repositories
             return product;
         }
 
-        public async Task<Product?> GetByIdAsync(Guid id)
+        public async Task<Product?> GetByIdAsync(int id)
         {
             return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
         }
@@ -32,20 +32,21 @@ namespace YasminStore.Infrastructure.Repositories
             return await _context.Products.ToListAsync();
         }
 
-        public async Task UpdateAsync(Product product)
+        public async Task<Product> UpdateAsync(Product product)
         {
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
+            return product;
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-                await _context.SaveChangesAsync();
-            }
+            var entity = await _context.Products.FindAsync(id);
+            if (entity == null) return false;
+
+            _context.Products.Remove(entity);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

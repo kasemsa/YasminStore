@@ -15,6 +15,7 @@ namespace YasminStore.Infrastructure
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IAuthService, AuthService>();
 
 

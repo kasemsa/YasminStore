@@ -16,14 +16,6 @@ namespace YasminStore.Application.Profiles
 
     public class RoleProfile : Profile
     {
-        //public RoleProfile()
-        //{
-        //    CreateMap<Role, RoleDto>().ReverseMap();
-        //    CreateMap<CreateRoleDto, Role>();
-        //    CreateMap<UpdateRoleDto, UpdateRoleCommand>();
-
-        //}
-
         public RoleProfile()
         {
             CreateMap<CreateRoleDto, Role>();

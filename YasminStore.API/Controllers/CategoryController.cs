@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using YasminStore.Application.Features.Categorys.Command.CreateCategory;
@@ -10,7 +11,7 @@ using YasminStore.ApplicationContract.DTOs.Categories;
 
 namespace YasminStore.API.Controllers
 {
-   
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CategoriesController : ControllerBase

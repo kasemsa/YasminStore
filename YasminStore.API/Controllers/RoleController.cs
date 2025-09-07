@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YasminStore.Application.Features.Role.Command.CreateRoleCommand;
 using YasminStore.Application.Features.Role.Command.DeleteRoleCommand;
@@ -9,6 +10,7 @@ using YasminStore.ApplicationContract.DTOs.Role;
 
 namespace YasminStore.API.Controllers
 {
+   // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class RoleController : ControllerBase

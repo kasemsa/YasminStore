@@ -61,6 +61,18 @@ namespace YasminStore.Persistence
                 .HasOne(ur => ur.Role)
                 .WithMany(r => r.userRoles)
                 .HasForeignKey(ur => ur.RoleId);
+
+
+            modelBuilder.Entity<Product>()
+                .HasKey(p => p.Id);
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Id)
+                .ValueGeneratedOnAdd(); // مهم جداً
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
         }
     }
 }

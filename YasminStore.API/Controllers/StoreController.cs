@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YasminStore.Application.Features.Stores.Command.CreateStore;
 using YasminStore.Application.Features.Stores.Command.DeleteStore;
@@ -12,6 +13,8 @@ using YasminStore.ApplicationContract.DTOs.Stores;
 
 namespace YasminStore.API.Controllers;
 
+
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class StoreController : ControllerBase
