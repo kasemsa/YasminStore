@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace YasminStore.Domain.Entities
 {
-    public  class StoreImages
+    public class ProductImage
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id {  get; set; }
-        public int StoreId {  get; set; }
-        public string Image {  get; set; }
+        public int Id { get; set; }
+        public int ProductId { get; set; }
+        public string Image { get; set; } = string.Empty;
 
-        [ForeignKey(nameof(StoreId))]
-        public Store Store { get; set; }
+        [ForeignKey(nameof(ProductId))]
+        public Product Product { get; set; } = new Product();
     }
 }

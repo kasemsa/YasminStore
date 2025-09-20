@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace YasminStore.Domain.Entities
 {
     public class Store
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -25,7 +27,7 @@ namespace YasminStore.Domain.Entities
         public string? whatsapp { get; set; }
         public string? telegram { get; set; }
 
-        public List<StoreImages> StoreImages { get; set; }
+        public List<StoreImages> StoreImages { get; set; } = new();
         public List<StoreCategory> StoreCategories { get; set; } = new();
         
     }
