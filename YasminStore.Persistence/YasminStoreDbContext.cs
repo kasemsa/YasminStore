@@ -22,9 +22,9 @@ namespace YasminStore.Persistence
         public DbSet<StoreImages> StoreImages { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
 
-        
 
 
         // لو أضفت كائن User لاحقًا
@@ -37,7 +37,7 @@ namespace YasminStore.Persistence
 
 
             modelBuilder.Entity<StoreCategory>()
-    .HasKey(sc => new { sc.StoreId, sc.CategoryId });
+                .HasKey(sc => new { sc.StoreId, sc.CategoryId });
 
             modelBuilder.Entity<StoreCategory>()
                 .HasOne(sc => sc.Store)

@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace YasminStore.Domain.Enums
+{
+    public enum SystemFileType
+    {
+        ProductImages,
+        Pdf,
+        Icons,
+        Videos,
+        Images
+    }
+}
