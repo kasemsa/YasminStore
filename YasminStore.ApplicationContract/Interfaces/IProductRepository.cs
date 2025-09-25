@@ -14,6 +14,8 @@ namespace YasminStore.ApplicationContract.Interfaces
         Task<IEnumerable<Product>> GetAllAsync();
         Task<Product> UpdateAsync(Product product);
         Task<bool> DeleteAsync(int id);
+
         Task<IEnumerable<Product>> SearchAsync(string keyword);
+
     }
 }

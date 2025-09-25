@@ -12,14 +12,18 @@ using YasminStore.Application.Features.Product.Command.DeleteProduct;
 using YasminStore.Application.Features.Product.Command.UpdateProduct;
 using YasminStore.Application.Features.Product.Query.GetAllProducts;
 using YasminStore.Application.Features.Product.Query.GetProductById;
+
 using YasminStore.Application.Features.Product.Query.SearchProducts;
+
 using YasminStore.ApplicationContract.DTOs.Product;
 using YasminStore.Domain.Entities;
 using YasminStore.Persistence;
 
 namespace YasminStore.API.Controllers
 {
+
     //[Authorize]
+
     [ApiController]
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
@@ -84,11 +88,13 @@ namespace YasminStore.API.Controllers
             return NoContent();
         }
 
+
         [HttpGet("search")]
         public async Task<IActionResult> Search([FromQuery] string keyword)
         {
             var result = await _mediator.Send(new SearchProductsQuery(keyword));
             return Ok(result);
         }
+
     }
 }

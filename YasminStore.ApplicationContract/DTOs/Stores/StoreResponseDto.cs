@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YasminStore.ApplicationContract.Enums
+namespace YasminStore.ApplicationContract.DTOs.Stores
 {
-    public enum SaleType
+    public class StoreResponseDto : UpdateStoreDto
     {
-        Wholesale,
-        retail
     }
 }

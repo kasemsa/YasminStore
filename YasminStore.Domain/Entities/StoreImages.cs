@@ -9,6 +9,7 @@ namespace YasminStore.Domain.Entities
 {
     public  class StoreImages
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id {  get; set; }
         public int StoreId {  get; set; }
         public string Image {  get; set; }

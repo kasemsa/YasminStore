@@ -49,11 +49,13 @@ namespace YasminStore.Infrastructure.Repositories
             return true;
         }
 
+
         public async Task<IEnumerable<Product>> SearchAsync(string keyword)
         {
             return await _context.Products
                 .Where(p => p.Name.Contains(keyword) || p.Description.Contains(keyword))
                 .ToListAsync();
         }
+
     }
 }
